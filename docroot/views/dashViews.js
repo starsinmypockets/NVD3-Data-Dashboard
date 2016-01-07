@@ -104,6 +104,21 @@ define(['backbone', 'views/baseViews', 'jquery', 'recline', 'multiBarHorizontalC
               height: self.state.get('height') || DEFAULT_CHART_HEIGHT
             };
             return layout;
+          },
+
+          x: function(record, xfield){
+            return record[xfield];
+          },
+          y: function(record, serie){
+            var seriesFields = {
+              'TOT. STUDENTS': 'total_students',
+              'EXTRA. ACTIVITIES': 'extracurricular_count',
+              'SPORTS': 'sports_count',
+              'AP COURSES': 'courses_count',
+              'GRAD. RATE': 'graduation_rate_2014',
+              'ON TRACK 2014': 'ontrack_year1_2014',
+            };
+            return record[seriesFields[serie]];
           }
         });
 

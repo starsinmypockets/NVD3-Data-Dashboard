@@ -27,12 +27,20 @@ define(['backbone', 'recline'], function (Backbone, Recline) {
 				var params = self.urlDecodeParams(self.parseQueryString(queryString));
         var model = new Recline.Model.Dataset(params);
         // @@ confParam - seriesFields - what fields do we want to compare
-        var seriesFields = ['total_students', 'extracurricular_count', 'sports_count', 'courses_count', 'graduation_rate_2014', 'ontrack_year1_2014'];
+        // Add userfriendly name.
+        var seriesFields = {
+          'TOT. STUDENTS': 'total_students',
+          'EXTRA. ACTIVITIES': 'extracurricular_count',
+          'SPORTS': 'sports_count',
+          'AP COURSES': 'courses_count',
+          'GRAD. RATE': 'graduation_rate_2014',
+          'ON TRACK 2014': 'ontrack_year1_2014',
+        };
 
         // @@todo - move this to the view!
         var states = [];
 
-        seriesFields.forEach(function (field) {
+        Object.keys(seriesFields).forEach(function (field) {
           var state = new Recline.Model.ObjectState({
             xfield: 'name',
             seriesFields: [field],
